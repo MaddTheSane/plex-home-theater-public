@@ -365,20 +365,18 @@ void DisplayFadeFromBlack(CGDisplayFadeReservationToken fade_token, bool fade)
 
 NSString* screenNameForDisplay(CGDirectDisplayID displayID)
 {
-  NSAutoreleasePool* pool = [[NSAutoreleasePool alloc] init];
-
   NSString *screenName = nil;
-
-  NSDictionary *deviceInfo = (NSDictionary *)IODisplayCreateInfoDictionary(CGDisplayIOServicePort(displayID), kIODisplayOnlyPreferredName);
-  NSDictionary *localizedNames = [deviceInfo objectForKey:[NSString stringWithUTF8String:kDisplayProductName]];
-
-  if ([localizedNames count] > 0) {
+  @autoreleasepool {
+    NSDictionary *deviceInfo = (NSDictionary *)IODisplayCreateInfoDictionary(CGDisplayIOServicePort(displayID), kIODisplayOnlyPreferredName);
+    NSDictionary *localizedNames = [deviceInfo objectForKey:[NSString stringWithUTF8String:kDisplayProductName]];
+    
+    if ([localizedNames count] > 0) {
       screenName = [[localizedNames objectForKey:[[localizedNames allKeys] objectAtIndex:0]] retain];
+    }
+    
+    [deviceInfo release];
   }
-
-  [deviceInfo release];
-  [pool release];
-
+  
   return [screenName autorelease];
 }
 
@@ -1444,36 +1442,35 @@ bool CWinSystemOSX::IsObscured(void)
 
 void CWinSystemOSX::NotifyAppFocusChange(bool bGaining)
 {
-  NSAutoreleasePool* pool = [[NSAutoreleasePool alloc] init];
-
-  if (m_bFullScreen && bGaining)
-  {
-    // find the window
-    NSOpenGLContext* context = [NSOpenGLContext currentContext];
-    if (context)
+  @autoreleasepool {
+    if (m_bFullScreen && bGaining)
     {
-      NSView* view;
-
-      view = [context view];
-      if (view)
+      // find the window
+      NSOpenGLContext* context = [NSOpenGLContext currentContext];
+      if (context)
       {
-        NSWindow* window;
-        window = [view window];
-        if (window)
+        NSView* view;
+        
+        view = [context view];
+        if (view)
         {
-          // find the screenID
-          NSDictionary* screenInfo = [[window screen] deviceDescription];
-          NSNumber* screenID = [screenInfo objectForKey:@"NSScreenNumber"];
-          if ((CGDirectDisplayID)[screenID longValue] == kCGDirectMainDisplay || DarwinIsMavericks() )
+          NSWindow* window;
+          window = [view window];
+          if (window)
           {
-            SetMenuBarVisible(false);
+            // find the screenID
+            NSDictionary* screenInfo = [[window screen] deviceDescription];
+            NSNumber* screenID = [screenInfo objectForKey:@"NSScreenNumber"];
+            if ((CGDirectDisplayID)[screenID longValue] == kCGDirectMainDisplay || DarwinIsMavericks() )
+            {
+              SetMenuBarVisible(false);
+            }
+            [window orderFront:nil];
           }
-          [window orderFront:nil];
         }
       }
     }
   }
-  [pool release];
 }
 
 void CWinSystemOSX::ShowOSMouse(bool show)
@@ -1483,31 +1480,25 @@ void CWinSystemOSX::ShowOSMouse(bool show)
 
 bool CWinSystemOSX::Minimize()
 {
-  NSAutoreleasePool* pool = [[NSAutoreleasePool alloc] init];
-
-  [[NSApplication sharedApplication] miniaturizeAll:nil];
-
-  [pool release];
+  @autoreleasepool {
+    [[NSApplication sharedApplication] miniaturizeAll:nil];
+  }
   return true;
 }
 
 bool CWinSystemOSX::Restore()
 {
-  NSAutoreleasePool* pool = [[NSAutoreleasePool alloc] init];
-
-  [[NSApplication sharedApplication] unhide:nil];
-
-  [pool release];
+  @autoreleasepool {
+    [[NSApplication sharedApplication] unhide:nil];
+  }
   return true;
 }
 
 bool CWinSystemOSX::Hide()
 {
-  NSAutoreleasePool* pool = [[NSAutoreleasePool alloc] init];
-
-  [[NSApplication sharedApplication] hide:nil];
-
-  [pool release];
+  @autoreleasepool {
+    [[NSApplication sharedApplication] hide:nil];
+  }
   return true;
 }
 
@@ -1572,20 +1563,18 @@ void CWinSystemOSX::Unregister(IDispResource* resource)
 
 bool CWinSystemOSX::Show(bool raise)
 {
-  NSAutoreleasePool* pool = [[NSAutoreleasePool alloc] init];
-
-  if (raise)
-  {
-    [[NSApplication sharedApplication] unhide:nil];
-    [[NSApplication sharedApplication] activateIgnoringOtherApps: YES];
-    [[NSApplication sharedApplication] arrangeInFront:nil];
+  @autoreleasepool {
+    if (raise)
+    {
+      [[NSApplication sharedApplication] unhide:nil];
+      [[NSApplication sharedApplication] activateIgnoringOtherApps: YES];
+      [[NSApplication sharedApplication] arrangeInFront:nil];
+    }
+    else
+    {
+      [[NSApplication sharedApplication] unhideWithoutActivation];
+    }
   }
-  else
-  {
-    [[NSApplication sharedApplication] unhideWithoutActivation];
-  }
-
-  [pool release];
   return true;
 }
 

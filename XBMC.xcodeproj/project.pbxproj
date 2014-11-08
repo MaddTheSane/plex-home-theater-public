@@ -249,7 +249,7 @@
 		5538432815F3633800CE061B /* NptDigest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5538432115F3633700CE061B /* NptDigest.cpp */; };
 		5538432915F3633800CE061B /* NptHash.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5538432315F3633700CE061B /* NptHash.cpp */; };
 		5538432B15F3646C00CE061B /* NptPosixTime.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5538432A15F3646C00CE061B /* NptPosixTime.cpp */; settings = {COMPILER_FLAGS = "-I$SRCROOT/lib/libUPnP/Platinum/Source/Core -I$SRCROOT/lib/libUPnP/Platinum/Source/Platinum -I$SRCROOT/lib/libUPnP/Platinum/Source/Devices/MediaConnect -I$SRCROOT/lib/libUPnP/Platinum/Source/Devices/MediaRenderer -I$SRCROOT/lib/libUPnP/Platinum/Source/Devices/MediaServer -I$SRCROOT/lib/libUPnP/Platinum/Source/Extras -I$SRCROOT/lib/libUPnP/Neptune/Source/System/Posix -I$SRCROOT/lib/libUPnP/Neptune/Source/Core"; }; };
-		5538433115F3678900CE061B /* NptCocoaEnviroment.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5538432D15F3678900CE061B /* NptCocoaEnviroment.mm */; settings = {COMPILER_FLAGS = "-I$SRCROOT/lib/libUPnP/Platinum/Source/Core -I$SRCROOT/lib/libUPnP/Platinum/Source/Platinum -I$SRCROOT/lib/libUPnP/Platinum/Source/Devices/MediaConnect -I$SRCROOT/lib/libUPnP/Platinum/Source/Devices/MediaRenderer -I$SRCROOT/lib/libUPnP/Platinum/Source/Devices/MediaServer -I$SRCROOT/lib/libUPnP/Platinum/Source/Extras -I$SRCROOT/lib/libUPnP/Neptune/Source/System/Posix -I$SRCROOT/lib/libUPnP/Neptune/Source/Core"; }; };
+		5538433115F3678900CE061B /* NptCocoaEnviroment.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5538432D15F3678900CE061B /* NptCocoaEnviroment.mm */; settings = {COMPILER_FLAGS = "-I$SRCROOT/lib/libUPnP/Platinum/Source/Core -I$SRCROOT/lib/libUPnP/Platinum/Source/Platinum -I$SRCROOT/lib/libUPnP/Platinum/Source/Devices/MediaConnect -I$SRCROOT/lib/libUPnP/Platinum/Source/Devices/MediaRenderer -I$SRCROOT/lib/libUPnP/Platinum/Source/Devices/MediaServer -I$SRCROOT/lib/libUPnP/Platinum/Source/Extras -I$SRCROOT/lib/libUPnP/Neptune/Source/System/Posix -I$SRCROOT/lib/libUPnP/Neptune/Source/Core -fobjc-arc"; }; };
 		5538433415F3685C00CE061B /* NptAppleAutoreleasePool.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5538433315F3685C00CE061B /* NptAppleAutoreleasePool.mm */; settings = {COMPILER_FLAGS = "-I$SRCROOT/lib/libUPnP/Platinum/Source/Core -I$SRCROOT/lib/libUPnP/Platinum/Source/Platinum -I$SRCROOT/lib/libUPnP/Platinum/Source/Devices/MediaConnect -I$SRCROOT/lib/libUPnP/Platinum/Source/Devices/MediaRenderer -I$SRCROOT/lib/libUPnP/Platinum/Source/Devices/MediaServer -I$SRCROOT/lib/libUPnP/Platinum/Source/Extras -I$SRCROOT/lib/libUPnP/Neptune/Source/System/Posix -I$SRCROOT/lib/libUPnP/Neptune/Source/Core"; }; };
 		7C0A7EC013A5DBCE00AFC2BD /* AppParamParser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C0A7EBE13A5DBCE00AFC2BD /* AppParamParser.cpp */; };
 		7C0B98A4154B79C30065A238 /* AEDeviceInfo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C0B98A1154B79C30065A238 /* AEDeviceInfo.cpp */; };
@@ -4284,8 +4284,10 @@
 				7C779E2E104A57E500F444C4 /* WinSystemOSXGL.h */,
 				7C779E2D104A57E500F444C4 /* WinSystemOSXGL.mm */,
 			);
+			indentWidth = 2;
 			path = osx;
 			sourceTree = "<group>";
+			usesTabs = 0;
 		};
 		552A226615F7E11B0015C0D0 /* main */ = {
 			isa = PBXGroup;
@@ -4611,9 +4613,11 @@
 				DFB15B2015F8FB8100CDF0DE /* SDLMain.h */,
 				DFB15B2115F8FB8100CDF0DE /* SDLMain.mm */,
 			);
+			indentWidth = 2;
 			name = osx;
 			path = main/osx;
 			sourceTree = "<group>";
+			usesTabs = 0;
 		};
 		DFB65F6315373AE7006B8FF1 /* AudioEngine */ = {
 			isa = PBXGroup;
@@ -4724,8 +4728,10 @@
 				E306D12C0DDF7B590052C2AD /* XBMCHelper.cpp */,
 				E306D12D0DDF7B590052C2AD /* XBMCHelper.h */,
 			);
+			indentWidth = 2;
 			path = osx;
 			sourceTree = "<group>";
+			usesTabs = 0;
 		};
 		E38E14610D25F9F900618676 /* xbmc */ = {
 			isa = PBXGroup;
@@ -7767,7 +7773,6 @@
 				GCC_MODEL_TUNING = "";
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
-					_DEBUG,
 					TARGET_POSIX,
 					TARGET_DARWIN,
 					TARGET_DARWIN_OSX,
@@ -7779,9 +7784,9 @@
 					__STDC_CONSTANT_MACROS,
 					HAVE_CONFIG_H,
 					HAS_SPC_CODEC,
+					"$(inherited)",
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				GCC_VERSION = com.apple.compilers.llvmgcc42;
 				GENERATE_PROFILING_CODE = NO;
 				HEADER_SEARCH_PATHS = (
 					$SRCROOT,
@@ -7896,13 +7901,12 @@
 					"_FILE_OFFSET_BITS=64",
 					_LARGEFILE64_SOURCE,
 					__STDC_CONSTANT_MACROS,
-					HAS_SDL_JOYSTICK,
 					HAVE_CONFIG_H,
 					HAS_SPC_CODEC,
+					"$(inherited)",
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				GCC_UNROLL_LOOPS = YES;
-				GCC_VERSION = com.apple.compilers.llvmgcc42;
 				HEADER_SEARCH_PATHS = (
 					$SRCROOT,
 					xbmc,
@@ -7998,7 +8002,10 @@
 				);
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PREPROCESSOR_DEFINITIONS = "";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					_DEBUG,
+					"$(inherited)",
+				);
 				GCC_VERSION = "";
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_SIGN_COMPARE = YES;
@@ -8021,7 +8028,7 @@
 					x86_64,
 				);
 				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PREPROCESSOR_DEFINITIONS = "";
+				GCC_PREPROCESSOR_DEFINITIONS = HAS_SDL_JOYSTICK;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_SIGN_COMPARE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;

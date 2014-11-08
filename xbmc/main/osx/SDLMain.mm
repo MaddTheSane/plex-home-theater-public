@@ -417,19 +417,17 @@ static void setupWindowMenu(void)
 - (void) deviceDidMountNotification:(NSNotification *) note 
 {
   // calling into c++ code, need to use autorelease pools
-  NSAutoreleasePool* pool = [[NSAutoreleasePool alloc] init];
-
-  CDarwinStorageProvider::SetEvent();
-  [pool release];
+  @autoreleasepool {
+    CDarwinStorageProvider::SetEvent();
+  }
 }
 
 - (void) deviceDidUnMountNotification:(NSNotification *) note 
 {
   // calling into c++ code, need to use autorelease pools
-  NSAutoreleasePool* pool = [[NSAutoreleasePool alloc] init];
-
-  CDarwinStorageProvider::SetEvent();
-  [pool release];
+  @autoreleasepool {
+    CDarwinStorageProvider::SetEvent();
+  }
 }
 
 #define VK_SLEEP            0x5F
@@ -530,7 +528,7 @@ static void setupWindowMenu(void)
 /* Main entry point to executable - should *not* be SDL_main! */
 int main(int argc, char *argv[])
 {
-  NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+  @autoreleasepool {
   XBMCDelegate *xbmc_delegate;
 
   // Block SIGPIPE
@@ -592,8 +590,8 @@ int main(int argc, char *argv[])
 
   [xbmc_delegate applicationWillTerminate:NULL];
   [xbmc_delegate release];
-  [pool release];
 
   return status;
+  }
 }
 #endif

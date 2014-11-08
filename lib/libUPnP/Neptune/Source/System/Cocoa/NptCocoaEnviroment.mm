@@ -25,16 +25,13 @@ NPT_Result
 NPT_GetSystemMachineName(NPT_String& name)
 {
     // we need a pool because of UTF8String
-    NSAutoreleasePool* pool = [[NSAutoreleasePool alloc] init];
-    
+	@autoreleasepool {
 #if !defined(TARGET_OS_IPHONE) || !TARGET_OS_IPHONE
-    CFStringRef _name = SCDynamicStoreCopyComputerName(NULL, NULL);
-    name = [(NSString *)_name UTF8String];
-    [(NSString *)_name release];
+		NSString *_name = CFBridgingRelease(SCDynamicStoreCopyComputerName(NULL, NULL));
+		name = [_name UTF8String];
 #else
-    name = [[[UIDevice currentDevice] name] UTF8String];
+		name = [[[UIDevice currentDevice] name] UTF8String];
 #endif
-    
-    [pool release];
+	}
     return NPT_SUCCESS;
 }
